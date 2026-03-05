@@ -29,10 +29,6 @@ object MyModule {
 }
 ```
 
-The generator also produces Swift `@_cdecl` thunks (reusing `JNISwift2JavaGenerator`) that make the Kotlin `external fun` declarations actually callable at runtime. End-to-end functionality is demonstrated in `kotlin-swift-test/`.
-
----
-
 ## Corners Cut
 
 - **Simplified type mapping** — only the required subset: `Int`, `Int32`, `Bool`, `Double`, `String`, `Void`. Optionals, arrays, and generics are not handled.
@@ -40,16 +36,12 @@ The generator also produces Swift `@_cdecl` thunks (reusing `JNISwift2JavaGenera
 - **No Gradle integration** — the end-to-end proof in `kotlin-swift-test/` uses raw `swiftc` + `kotlinc` commands instead of a full Gradle build system integration like the existing JNI sample app.
 - **No dedicated `--output-kotlin` flag** — reuses `--output-java` for the Kotlin output directory.
 
----
-
 ## What an Ideal Solution Would Look Like
 
 - Full Gradle integration with an auto-running `jextract` task (like `SwiftJavaExtractJNISampleApp`)
 - Full type mapping including optionals (`String?` → `String?`), arrays (`[Int]` → `List<Long>`), and closures
 - Proper `package` declaration and Kotlin-idiomatic output (`@JvmStatic`, nullable types)
 - A dedicated `--output-kotlin` CLI flag
-
----
 
 ## What I Would Do Next
 
