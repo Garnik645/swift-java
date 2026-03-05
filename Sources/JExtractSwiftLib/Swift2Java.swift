@@ -113,6 +113,7 @@ public struct SwiftToJava {
       let generator = KotlinSwift2JavaGenerator(
         config: self.config,
         translator: translator,
+        swiftOutputDirectory: outputSwiftDirectory,
         kotlinOutputDirectory: outputJavaDirectory
       )
       try generator.generate()
